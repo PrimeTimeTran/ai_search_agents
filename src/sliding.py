@@ -82,8 +82,6 @@ def bfs(start_state, max_nodes=100000):
 
     return None
 
-
-
 class PuzzleState:
     def __init__(self, board, empty_pos=None, moves=[]):
         self.board = board
@@ -150,22 +148,20 @@ class Game:
         possible_states = self.current_state.possible_moves()
         for state in possible_states:
             if state.moves[-1] == direction:
-                # Find what tile was moved (swapped with 0)
                 x0, y0 = self.current_state.empty_pos
-                x1, y1 = state.empty_pos  # new empty position (0 moved here)
+                x1, y1 = state.empty_pos
                 moved_tile = self.current_state.board[x1][y1]
 
                 self.current_state = state
                 self.history.append({
                     "board": copy.deepcopy(state.board),
-                    "direction": REVERSE_DIRECTION[direction],  # flip it
+                    "direction": REVERSE_DIRECTION[direction],
                     "tile": moved_tile
                 })
                 return True
         return False
 
     def solve(self):
-        # Clear history and include initial state before solving
         self.history = [{
             "board": copy.deepcopy(self.current_state.board),
             "direction": None,
@@ -199,4 +195,3 @@ class Game:
                 print(f"  → Moved tile {step['tile']} {step['direction']}")
             for row in step["board"]:
                 print(row)
-            print()

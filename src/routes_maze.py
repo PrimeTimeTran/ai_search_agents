@@ -1,4 +1,5 @@
-from flask import Blueprint, jsonify, render_template, request, session
+from flask import Blueprint, jsonify, request, session
+
 from .maze import MazeGame
 
 maze_bp = Blueprint('maze', __name__, template_folder='templates')
@@ -17,27 +18,6 @@ def multi_path_maze():
     session['maze'] = maze
     return jsonify(maze)
 
-# # Works. But doesn't include optimal path
-# @maze_bp.route("/api/maze/solve")
-# def solve_maze():
-#     maze_data = session.get('maze')
-#     if not maze_data:
-#         return jsonify({'error': 'Maze not generated yet'}), 400
-
-#     game = MazeGame(maze=maze_data)
-#     algorithm = request.args.get('algorithm', 'bfs')
-
-#     path = game.solve(algorithm=algorithm)
-#     stats = game.get_stats()
-
-#     return jsonify({
-#         'maze': game.maze,
-#         'path': path,
-#         'visited': stats['visited_cells'],
-#         'steps': stats['steps']
-#     })
-
-
 @maze_bp.route("/api/maze/solve")
 def solve_maze():
     import copy
@@ -48,7 +28,6 @@ def solve_maze():
     if not raw_maze:
         return jsonify({'error': 'Maze not generated yet'}), 400
 
-    # Remove 'S' and 'G' before solving
     def clean_maze(maze):
         return [
             [0 if cell in ('S', 'G') else cell for cell in row]
@@ -59,17 +38,15 @@ def solve_maze():
     start = (0, 0)
     goal = (len(cleaned_maze) - 1, len(cleaned_maze[0]) - 1)
 
-    # Create MazeGame with cleaned maze
     game = MazeGame(maze=copy.deepcopy(cleaned_maze), start=start, goal=goal)
     path = game.solve(algorithm=algorithm)
     stats = game.get_stats()
 
-    # Also solve optimally with BFS
     optimal_game = MazeGame(maze=copy.deepcopy(cleaned_maze), start=start, goal=goal)
     optimal_path = optimal_game.solve(algorithm='bfs')
 
     return jsonify({
-        'maze': raw_maze,  # for rendering with 'S' and 'G'
+        'maze': raw_maze,
         'path': path or [],
         'visited': stats['visited_cells'],
         'steps': stats['steps'],

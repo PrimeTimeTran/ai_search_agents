@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request, session
 
-from .game import Game, generate_15_puzzle, generate_solvable_15_puzzle, SOLVED, is_solvable
+from .sliding import Game, generate_15_puzzle, generate_solvable_15_puzzle, SOLVED, is_solvable
 
 puzzle_bp = Blueprint('puzzle', __name__, template_folder='templates')
 
