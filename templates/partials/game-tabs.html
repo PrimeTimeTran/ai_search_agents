@@ -1,17 +1,17 @@
-{% include 'partials/sliding-puzzle.html' %}
-<div
-  id="maze-tab"
-  class="tab-content"
-  style="display: none"
->
-  <h2>Maze (Coming Soon)</h2>
-  <p>Maze game will go here.</p>
-</div>
-<div
-  id="tictactoe-tab"
-  class="tab-content"
-  style="display: none"
->
-  <h2>Tic Tac Toe (Coming Soon)</h2>
-  <p>Tic Tac Toe game will go here.</p>
+{% include 'partials/sliding-puzzle.html' %} {% include 'partials/maze.html' %}
+<div class="container">
+  <div
+    id="tictactoe-tab"
+    class="column tab-content"
+    style="display: none"
+  >
+  </div>
+  <div
+    id="extra-ui-tictactoe"
+    class="column"
+    style="display: none"
+  >
+    <h2>Tic Tac Toe Options</h2>
+    <div id="sliding-puzzle-solution"></div>
+  </div>
 </div>

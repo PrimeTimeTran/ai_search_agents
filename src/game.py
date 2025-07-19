@@ -42,8 +42,7 @@ def generate_solvable_15_puzzle():
         [13, 14, 15, 0]
     ]
     game = Game(solved)
-    directions = ['up', 'down', 'left', 'right']
-    for _ in range(10):
+    for _ in range(20):
         possible = game.current_state.possible_moves()
         if possible:
             move = choice(possible)
@@ -147,7 +146,6 @@ class Game:
             "tile": None
         }]
 
-
     def move(self, direction):
         possible_states = self.current_state.possible_moves()
         for state in possible_states:
@@ -194,7 +192,6 @@ class Game:
             return []
         return solution_moves
 
-
     def print_history(self):
         for i, step in enumerate(self.history):
             print(f"Move {i}:")
@@ -203,23 +200,3 @@ class Game:
             for row in step["board"]:
                 print(row)
             print()
-
-
-# def is_solvable(board):
-#     flat = [num for row in board for num in row]
-#     inversions = 0
-
-#     for i in range(len(flat)):
-#         for j in range(i + 1, len(flat)):
-#             if flat[i] != 0 and flat[j] != 0 and flat[i] > flat[j]:
-#                 inversions += 1
-
-#     for i in range(4):
-#         for j in range(4):
-#             if board[i][j] == 0:
-#                 blank_row_from_bottom = 4 - i
-
-#     return (inversions + blank_row_from_bottom) % 2 == 0
-
-# is_solvable_result = is_solvable(generate_15_puzzle())
-# print('is_solvable_result: ', is_solvable_result)

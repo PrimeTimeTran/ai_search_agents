@@ -1,0 +1,22 @@
+<div class="container">
+  <div
+    id="maze-tab"
+    class="column tab-content"
+    style="display: none"
+  >
+    <div id="maze-board"></div>
+  </div>
+  <div
+    id="extra-ui-maze"
+    class="column"
+    style="display: none"
+  >
+    <h2>Maze Options</h2>
+    <div id="sliding-puzzle-solution">
+      <button onclick="fetchMaze()">New Maze</button>
+      <button onclick="solveMazeAndRender('dfs')">DFS Solve</button>
+      <button onclick="solveMazeAndRender('bfs')">BFS Solve</button>
+      <button onclick="renderStepNumbers()">Show Step Numbers</button>
+    </div>
+  </div>
+</div>

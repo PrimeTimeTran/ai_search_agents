@@ -1,0 +1,55 @@
+#maze-board table {
+  border-collapse: collapse;
+}
+
+#maze-board td {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #aaa;
+  font-size: 12px;
+}
+
+.maze-wall {
+  background-color: #333;
+}
+
+.maze-path {
+  background-color: #fff;
+}
+
+.maze-start {
+  background-color: limegreen;
+  font-weight: bold;
+  color: white;
+}
+
+.maze-goal {
+  background-color: red;
+  font-weight: bold;
+  color: white;
+}
+
+.maze-visited {
+  background-color: yellow;
+}
+
+.wall {
+  background-color: black;
+}
+.empty {
+  background-color: white;
+}
+.start {
+  background-color: green;
+}
+.goal {
+  background-color: red;
+}
+.visited {
+  background-color: lightblue;
+}
+.solution {
+  background-color: orange;
+}

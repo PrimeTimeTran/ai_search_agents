@@ -1,17 +1,14 @@
+import os
 from flask import Flask
-from src.sliding_game import puzzle_bp
-from src.game import Game, generate_solvable_15_puzzle
+from src.routes_sliding import puzzle_bp
+from src.routes_maze import maze_bp
 
 app = Flask(__name__)
 app.secret_key = "secret"
 app.register_blueprint(puzzle_bp)
-
-@app.route("/test")
-def test():
-    return "Hello from test route"
+app.register_blueprint(maze_bp)
 
 if __name__ == "__main__":
-    # game = Game(generate_solvable_15_puzzle())
-    # game.solve()
-    # game.print_history()
-    app.run(debug=True, use_reloader=True)
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
+

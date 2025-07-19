@@ -7,6 +7,10 @@ puzzle_bp = Blueprint('puzzle', __name__, template_folder='templates')
 def is_solved(board):
     return board == SOLVED
 
+@puzzle_bp.route("/")
+def home():
+    return render_template("index.html")
+
 @puzzle_bp.route("/puzzle")
 def puzzle():
     return render_template("index.html")
