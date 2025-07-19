@@ -13,29 +13,36 @@ def puzzle():
 
 @puzzle_bp.route("/api/puzzle")
 def api_puzzle():
-    board = generate_solvable_15_puzzle()
+    board = generate_15_puzzle()
     if 'board' not in session:
         session['board'] = board
-    # game = Game(board)
-    # game.solve()
-    # game.print_history()
     return jsonify({"board": session['board']})
 
 @puzzle_bp.route("/api/new_sliding_puzzle", methods=["POST"])
-def api_new_board():
+def api_new_sliding_puzzle():
     board = generate_solvable_15_puzzle()
     session['board'] = board
     return jsonify({
-        "message": "New board generated.",
+        "message": "New solvable board generated.",
         "board": board
     })
 
+@puzzle_bp.route("/api/new_sliding_puzzle/easy", methods=["POST"])
+def api_new_easy_sliding_puzzle():
+    board = generate_15_puzzle()
+    session['board'] = board
+    return jsonify({
+        "message": "New solvable board generated.",
+        "board": board
+    })
 
 @puzzle_bp.route("/api/move", methods=["POST"])
 def api_move():
     data = request.get_json()
     row, col = data['row'], data['col']
     board = session.get('board', generate_solvable_15_puzzle())
+    if 'board' not in session:
+        session['board'] = board
     for i in range(4):
         for j in range(4):
             if board[i][j] == 0:
@@ -49,6 +56,8 @@ def api_move():
 @puzzle_bp.route("/api/plan", methods=["GET"])
 def plan_solution():
     board = session.get('board')
+    for row in board:
+        print(row)
     if not board:
         return jsonify({"error": "No board in session."}), 400
 
@@ -65,36 +74,4 @@ def plan_solution():
         "solution_moves": solution_moves,
         "move_count": len(solution_moves),
         "solved": is_solved(board)
-    })
-
-
-@puzzle_bp.route("/api/solve", methods=["GET"])
-def solve_board():
-    board = session.get('board')
-    if not board:
-        return jsonify({"error": "No board in session."}), 400
-
-    print("Solving board:")
-    for row in board:
-        print(row)
-
-    game = Game(board)
-    moves = game.solve()
-
-    if not moves:
-        print("No moves returned by BFS")
-
-    return jsonify({
-        "solution_moves": moves,
-        "move_count": len(moves),
-        "history": [
-            {
-                "move": i,
-                "direction": step["direction"],
-                "tile": step["tile"],
-                "board": step["board"]
-            }
-            for i, step in enumerate(game.history)
-        ],
-        "solved": is_solved(game.current_state.board)
     })

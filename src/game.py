@@ -1,4 +1,6 @@
-import copy, random
+import copy
+from random import choice
+
 from collections import deque
 
 SOLVED = [
@@ -18,6 +20,7 @@ REVERSE_DIRECTION = {
 def is_solvable(board):
     flat = [num for row in board for num in row]
     inversions = 0
+
     for i in range(len(flat)):
         for j in range(i + 1, len(flat)):
             if flat[i] != 0 and flat[j] != 0 and flat[i] > flat[j]:
@@ -26,17 +29,27 @@ def is_solvable(board):
     for i in range(4):
         for j in range(4):
             if board[i][j] == 0:
-                blank_row_from_bottom = 4 - i
+                row_from_bottom = 3 - i
 
-    return (inversions + blank_row_from_bottom) % 2 == 0
+    return (inversions + row_from_bottom) % 2 == 0
+
 
 def generate_solvable_15_puzzle():
-    nums = list(range(16))
-    while True:
-        random.shuffle(nums)
-        board = [nums[i*4:(i+1)*4] for i in range(4)]
-        if is_solvable(board):
-            return board
+    solved = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 0]
+    ]
+    game = Game(solved)
+    directions = ['up', 'down', 'left', 'right']
+    for _ in range(10):
+        possible = game.current_state.possible_moves()
+        if possible:
+            move = choice(possible)
+            game.current_state = move
+    return game.current_state.board
+
 
 def generate_15_puzzle():
     return [
@@ -46,14 +59,18 @@ def generate_15_puzzle():
         [13, 14, 15, 12]
     ]
 
-def bfs(start_state, max_nodes=100_000):
+def bfs(start_state, max_nodes=100000):
     visited = set()
     queue = deque([start_state])
-    nodes_explored = 0
+    count = 0
 
     while queue:
         current = queue.popleft()
-        nodes_explored += 1
+        count += 1
+
+        if count > max_nodes:
+            print("BFS aborted: too many nodes explored.")
+            return None
 
         if current.is_goal():
             return current.moves
@@ -64,12 +81,8 @@ def bfs(start_state, max_nodes=100_000):
             if neighbor not in visited:
                 queue.append(neighbor)
 
-        # Limit search to prevent infinite loop
-        if nodes_explored > max_nodes:
-            print("BFS aborted: too many nodes explored.")
-            return None
-
     return None
+
 
 
 class PuzzleState:

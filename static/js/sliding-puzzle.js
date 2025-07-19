@@ -28,6 +28,25 @@ function renderBoard() {
   }
 }
 
+function renderSolution(data) {
+  const solutionDiv = document.getElementById('sliding-puzzle-solution')
+
+  if (data.error) {
+    solutionDiv.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`
+    return
+  }
+
+  const moves = data.solution_moves
+  const moveList = moves
+    .map((move, i) => `<li>Step ${i + 1}: <strong>${move}</strong></li>`)
+    .join('')
+
+  solutionDiv.innerHTML = `
+    <p><strong>Moves to solve the puzzle (${data.move_count} total):</strong></p>
+    <ul>${moveList}</ul>
+  `
+}
+
 function tryMove(i, j) {
   fetch('/api/move', {
     method: 'POST',
@@ -49,9 +68,24 @@ function fetchNewBoard() {
   fetch('/api/new_sliding_puzzle', { method: 'POST' })
     .then((res) => res.json())
     .then((data) => {
-      // console.log('New board:', data.board)
       board = data.board
       renderBoard()
+    })
+}
+function fetchEasyBoard() {
+  fetch('/api/new_sliding_puzzle/easy', { method: 'POST' })
+    .then((res) => res.json())
+    .then((data) => {
+      board = data.board
+      renderBoard()
+    })
+}
+
+function fetchSolution() {
+  fetch('/api/plan', { method: 'GET' })
+    .then((res) => res.json())
+    .then((data) => {
+      renderSolution(data)
     })
 }
 
