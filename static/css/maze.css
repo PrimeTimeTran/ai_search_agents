@@ -50,12 +50,12 @@ td.solution {
   background-color: lightgreen;
 }
 td.optimal {
-  background-color: orange;
+  background-color: yellow;
 }
 
 td.optimal {
   position: relative;
-  background-color: #ffa50033; /* Light orange base */
+  background-color: #ffa50033;
   overflow: hidden;
 }
 
@@ -69,7 +69,7 @@ td.optimal::before {
   background: linear-gradient(
     120deg,
     transparent,
-    rgba(255, 165, 0, 0.5),
+    rgba(242, 255, 0, 0.5),
     transparent
   );
   animation: shimmer 1.5s infinite;

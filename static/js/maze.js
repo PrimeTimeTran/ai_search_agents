@@ -1,6 +1,6 @@
 let maze = []
 
-function renderMazeBoard(
+async function renderMazeBoard(
   maze,
   path = [],
   visited = [],
@@ -12,13 +12,11 @@ function renderMazeBoard(
   const table = document.getElementById('maze-board')
   table.innerHTML = ''
 
-  // Convert to sets for faster lookups
   const visitedSet = new Set(visited.map(([i, j]) => `${i}-${j}`))
   const optimalSet = new Set(optimal.map(([i, j]) => `${i}-${j}`))
   const pathSet = new Set(path.map(([i, j]) => `${i}-${j}`))
 
-  // First pass: render everything and mark optimal
-  const cellRefs = [] // Cache references so we can overwrite with 'solution' later
+  const cellRefs = []
 
   for (let i = 0; i < maze.length; i++) {
     const row = document.createElement('tr')
@@ -35,8 +33,6 @@ function renderMazeBoard(
         cell.className = 'start'
       } else if (val === 'G') {
         cell.className = 'goal'
-      } else if (optimalSet.has(key)) {
-        cell.className = 'optimal'
       } else if (visitedSet.has(key)) {
         cell.className = 'visited'
       } else {
@@ -55,14 +51,25 @@ function renderMazeBoard(
     cellRefs.push(rowRefs)
   }
 
-  // Second pass: apply solution (green) over the top
-  for (const [i, j] of path) {
-    const key = `${i}-${j}`
-    const cell = cellRefs[i][j]
+  await animateCells(path, 'solution', 15)
 
-    // Don't overwrite start or goal
-    if (maze[i][j] !== 'S' && maze[i][j] !== 'G') {
-      cell.className = 'solution'
+  await animateCells(optimal, 'optimal', 15, pathSet)
+
+  async function animateCells(
+    cells,
+    className,
+    delay = 20,
+    skipSet = new Set()
+  ) {
+    for (const [i, j] of cells) {
+      const key = `${i}-${j}`
+      const cell = cellRefs[i][j]
+
+      if (maze[i][j] === 'S' || maze[i][j] === 'G') continue
+      if (skipSet.has(key)) continue
+
+      cell.className = className
+      await new Promise((resolve) => setTimeout(resolve, delay))
     }
   }
 }
@@ -132,7 +139,6 @@ function copyMazeToClipboard() {
 
   const formatted = JSON.stringify(maze)
 
-  // Copy to clipboard
   navigator.clipboard
     .writeText(formatted)
     .then(() => {
