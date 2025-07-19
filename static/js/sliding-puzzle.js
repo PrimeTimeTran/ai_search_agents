@@ -65,6 +65,7 @@ function tryMove(i, j) {
 }
 
 function fetchNewBoard() {
+  document.getElementById('sliding-puzzle-solution').innerHTML = ''
   fetch('/api/new_sliding_puzzle', { method: 'POST' })
     .then((res) => res.json())
     .then((data) => {
@@ -72,7 +73,9 @@ function fetchNewBoard() {
       renderBoard()
     })
 }
+
 function fetchEasyBoard() {
+  document.getElementById('sliding-puzzle-solution').innerHTML = ''
   fetch('/api/new_sliding_puzzle/easy', { method: 'POST' })
     .then((res) => res.json())
     .then((data) => {
