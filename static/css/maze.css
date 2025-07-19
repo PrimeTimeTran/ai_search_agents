@@ -38,18 +38,63 @@
 .wall {
   background-color: black;
 }
+
 .empty {
   background-color: white;
 }
 .start {
   background-color: green;
 }
-.goal {
-  background-color: red;
+
+td.solution {
+  background-color: lightgreen;
 }
+td.optimal {
+  background-color: orange;
+}
+
+td.optimal {
+  position: relative;
+  background-color: #ffa50033; /* Light orange base */
+  overflow: hidden;
+}
+
+td.optimal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 165, 0, 0.5),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
 .visited {
   background-color: lightblue;
 }
-.solution {
-  background-color: orange;
+
+.start {
+  background-color: gold;
+}
+
+.goal {
+  background-color: green;
 }

@@ -14,9 +14,15 @@
     <h2>Maze Options</h2>
     <div id="sliding-puzzle-solution">
       <button onclick="fetchMaze()">New Maze</button>
+      <button onclick="fetchMultiPathMaze()">New Multi Path Maze</button>
       <button onclick="solveMazeAndRender('dfs')">DFS Solve</button>
       <button onclick="solveMazeAndRender('bfs')">BFS Solve</button>
-      <button onclick="renderStepNumbers()">Show Step Numbers</button>
+      <button onclick="renderStepNumbers('bfs')">Render Step Numbers</button>
+      <button onclick="copyMazeToClipboard()">Copy Maze to Clipboard</button>
+    </div>
+    <h2>Path Stats</h2>
+    <div>
+      <div id="num-steps"></div>
     </div>
   </div>
 </div>
