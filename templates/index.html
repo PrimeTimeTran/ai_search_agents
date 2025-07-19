@@ -15,6 +15,16 @@
     <h1>AI Games</h1>
     {% include 'partials/tab-buttons.html' %} {% include
     'partials/game-tabs.html' %}
+    <footer>
+      <p>
+        Deployed from commit:
+        <a
+          href="{{ commit_url }}"
+          target="_blank"
+          >{{ commit_sha }}</a
+        >
+      </p>
+    </footer>
     <script>
       function showTab(tab) {
         document.getElementById('puzzle-tab').style.display = 'none'

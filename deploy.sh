@@ -3,6 +3,8 @@
 VERSION=$(git rev-parse --short HEAD)
 
 docker buildx build --platform=linux/amd64 \
+  --build-arg COMMIT_SHA=$VERSION \
+  --build-arg COMMIT_URL=$COMMIT_URL \
   -t us-east1-docker.pkg.dev/ai-search-puzzles/my-repo/ai-search-agents:$VERSION \
   -t us-east1-docker.pkg.dev/ai-search-puzzles/my-repo/ai-search-agents:latest \
   .
