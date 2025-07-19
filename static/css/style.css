@@ -1,0 +1,63 @@
+table {
+  border-collapse: collapse;
+}
+td {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  font-size: 24px;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+.empty {
+  background: #eee;
+  cursor: default;
+}
+.tab-btn {
+  padding: 10px 20px;
+  margin-right: 5px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px 4px 0 0;
+}
+.tab-btn.active {
+  background: #4caf50;
+  color: #fff;
+}
+.tab-content {
+  margin-top: 0;
+}
+
+#toast {
+  visibility: hidden;
+  min-width: 200px;
+  background: #4caf50;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 90%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 17px;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+}
+
+#puzzle-tab,
+#extra-ui {
+  border: 1px solid #ccc;
+  padding: 16px;
+  background-color: #f9f9f9;
+}

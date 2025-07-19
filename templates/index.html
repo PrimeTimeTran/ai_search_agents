@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Puzzle Solver</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <h1>AI Games</h1>
+    {% include 'partials/tab-buttons.html' %}
+    <div></div>
+    {% include 'partials/game-tabs.html' %}
+    <script>
+      function showTab(tab) {
+        document.getElementById('puzzle-tab').style.display = 'none'
+        document.getElementById('maze-tab').style.display = 'none'
+        document.getElementById('tictactoe-tab').style.display = 'none'
+        document.getElementById(tab + '-tab').style.display = 'block'
+        document
+          .querySelectorAll('.tab-btn')
+          .forEach((btn) => btn.classList.remove('active'))
+        if (tab === 'puzzle')
+          document.querySelectorAll('.tab-btn')[0].classList.add('active')
+        if (tab === 'maze')
+          document.querySelectorAll('.tab-btn')[1].classList.add('active')
+        if (tab === 'tictactoe')
+          document.querySelectorAll('.tab-btn')[2].classList.add('active')
+      }
+    </script>
+    <script src="{{ url_for('static', filename='js/sliding-puzzle.js') }}"></script>
+  </body>
+</html>
