@@ -1,5 +1,8 @@
 # AI Search Agents
 
+![Preview](ai-search-agents.gif)
+[Demo](https://ai-search-agents-619024344714.us-east1.run.app/)
+
 A fundamental pillar of AI is the Agent.
 
 Agents are aware of the state of a problem space & take actions on them toward a goal.
