@@ -25,7 +25,5 @@ gcloud run deploy ai-search-agents \
   --region us-east1 \
   --allow-unauthenticated
 
-echo "✅ Deployment complete: $COMMIT_URL"
-echo "::notice title=Deployment complete::View commit $COMMIT_URL"
+echo "::notice title=Deployment Complete::View commit $COMMIT_URL"
 echo "::notice title=Commit::https://github.com/$GIT_REPO/commit/$GIT_COMMIT_SHA"
-echo "::notice title=Workflow Run::${WORKFLOW_RUN_URL}"
