@@ -13,11 +13,24 @@
   >
     <h2>Maze Options</h2>
     <div id="sliding-puzzle-solution">
-      <button onclick="fetchMultiPathMaze()">New Maze</button>
-      <button onclick="solveMazeAndRender('dfs')">DFS Solve</button>
-      <button onclick="solveMazeAndRender('bfs')">BFS Solve</button>
-      <button onclick="renderStepNumbers('bfs')">Render Step Numbers</button>
-      <button onclick="copyMazeToClipboard()">Copy Maze to Clipboard</button>
+      <button
+        class="tab-btn"
+        onclick="fetchMultiPathMaze()"
+      >
+        New Maze
+      </button>
+      <button
+        class="tab-btn"
+        onclick="solveMazeAndRender('dfs')"
+      >
+        DFS Solve
+      </button>
+      <button
+        class="tab-btn"
+        onclick="solveMazeAndRender('bfs')"
+      >
+        BFS Solve(Optimized Solution)
+      </button>
     </div>
     <h2>Path Stats</h2>
     <div>
