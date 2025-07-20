@@ -12,7 +12,8 @@ app.register_blueprint(maze_bp)
 def inject_commit_info():
     return {
         "commit_sha": os.getenv("COMMIT_SHA", "unknown"),
-        "commit_url": os.getenv("COMMIT_URL", "#")
+        "commit_url": os.getenv("COMMIT_URL", "#"),
+        "workflow_run_url": os.getenv("WORKFLOW_RUN_URL", "#")
     }
 
 if __name__ == "__main__":

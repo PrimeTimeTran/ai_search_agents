@@ -30,8 +30,12 @@ jobs:
       - name: Authenticate Docker for Artifact Registry
         run: gcloud auth configure-docker us-east1-docker.pkg.dev --quiet
 
+      - name: Print workflow run URL
+        run: echo "::notice title=Workflow Run::https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
       - name: Deploy to Cloud Run
         run: ./deploy.sh
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
           GIT_REPO: ${{ github.repository }}
+          WORKFLOW_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
