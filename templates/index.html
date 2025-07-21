@@ -12,27 +12,12 @@
     />
   </head>
   <body>
-    <h1>AI Search Agents</h1>
+    <div>
+      <h1>AI Search Agents</h1>
+    </div>
     {% include 'partials/tab-buttons.html' %} {% include
-    'partials/game-tabs.html' %}
-    <footer>
-      <p>
-        Deployed from commit:
-        <a
-          href="{{ commit_url }}"
-          target="_blank"
-          >{{ commit_sha }}</a
-        >
-      </p>
-      <p>
-        Workflow run:
-        <a
-          href="{{ workflow_run_url }}"
-          target="_blank"
-          >{{ workflow_run_url }}</a
-        >
-      </p>
-    </footer>
+    'partials/game-tabs.html' %} {% include 'partials/footer.html' %}
+
     <script>
       function showTab(tab) {
         document.getElementById('puzzle-tab').style.display = 'none'

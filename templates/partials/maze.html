@@ -4,6 +4,9 @@
     class="column tab-content"
     style="display: none"
   >
+    <div>Can you find a path from the yellow to green cells?</div>
+    <div>Do you know if it's the optimal path?</div>
+    <br />
     <div id="maze-board"></div>
   </div>
   <div
@@ -31,6 +34,20 @@
       >
         BFS Solve(Optimized Solution)
       </button>
+    </div>
+    <h2>Legend</h2>
+    <div id="legend">
+      <table>
+        <tr>
+          <td class="wall white-text">Wall</td>
+          <td class="start">Start</td>
+          <td class="goal">Goal</td>
+          <td class="visited">Visited</td>
+          <td class="solution">Path</td>
+          <td class="optimal">Optimal</td>
+          <td class="empty">Empty</td>
+        </tr>
+      </table>
     </div>
     <h2>Path Stats</h2>
     <div>
